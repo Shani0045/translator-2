@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to Gtrans</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/bootstrap.css')}}">
+	<style type="text/css">
+		.container{border:4px solid #3b5998;background-image: url("{{url_for('static',filename='img/cm.jpg')}}");background-repeat: no-repeat;background-size:cover;}
+		.row-1{background-color:#3b5998;color:white;}
+		.mrq{border:3px solid black;}
+		h1{font-size: 40px;}
+		.btn{border-radius: 180px;width: 140px;height:140px;padding-top:47px;font-weight: bold;background-color:gray;color:white;}
+		
+		/* h3{color: white;} */
+	</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div class="row row-1 ">
+			<div class="col mt-3  ml-5 mb-2">
+				<h1>Dashboard</h1>
+				
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col ">
+				<marquee style="font-size:20px;">Welcome to dashbord here is three section first is translator second english grammer that included part of speech and the third section is developer profile.</marquee>
+				
+			</div>
+		</div>
+		<div class="row">
+			
+			<div class="col">
+				<a href="{{url_for('translator')}}">
+				<div class="btn btn-default btn-lg mt-5 offset-1 offset-md-6">Translator</div></a>
+			</div>
+			
+			<div class="col">
+				<a href="{{url_for('pos')}}">
+				<div class="btn btn-default btn-lg mt-5 offset-1 offset-md-2">English Grammer</div></a>
+			</div>
+		</div>
+
+		<div class="row mt-4">
+			
+			<div class="col">
+				<a href="{{url_for('profile')}}">
+				<div class="btn btn-default btn-lg mt-5 offset-4 offset-md-5 mb-5">Developer Profile</div></a>s
+				</form>
+
+			</div>
+			
+		</div>
+
+		<div class="row">
+			<div class="col ">
+				@copyright
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

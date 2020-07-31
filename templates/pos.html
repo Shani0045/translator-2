@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/bootstrap.css')}}">
+	<style type="text/css">
+		.container{border:3px solid; border-color: #3b5998;background-image:url("{{url_for('static',filename='img/cm.jpg')}}");background-size: cover;background-repeat: no-repeat;}
+		.p{font-size:37px;font-weight: bold; border:2px solid; border-style:ridge; border-color:#3b5998;background-color: #3b5998;color:white;}
+		
+	</style>
+</head>
+<body>
+	
+	<div class="container">
+		<form method="post" action="/part_of_speech" >
+		<div class="row">
+			<div class="col p text-center">
+				Part Of Speech
+			</div>	
+		</div>
+		<div class="row">
+			<div class="col-md-5 offset-md-3  mt-5">
+				<div class="form-group">
+					<textarea  class="form-control" rows="6" placeholder="Type Sentence...." name="txt"></textarea>
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-5 offset-md-3 mt-2">
+				<div class="form-group">
+					<input type="submit" class="form-control btn btn-success" name="" value="Find part of speech">
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-5 offset-md-3  mt-2">
+				<div class="form-group">
+					<textarea  class="form-control" rows="12" readonly>{{p}}</textarea>
+					
+				</div>
+			</div>
+		</div>
+	</form>
+	</div>
+
+</body>
+</html>
