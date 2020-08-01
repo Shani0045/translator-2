@@ -35,7 +35,7 @@ def part_of_speech():
         doc=nlp(u"{}".format(text))
         l=[]
         for i in doc:
-            pr=f"{i.text} : {spacy.explain(i.pos_)}"
+            pr=f"{i.text} : {spacy.explain(i.tag_)}"
             l.append(pr)
         return render_template("pos.html",p=l)
     redirect(url_for('pos'))
