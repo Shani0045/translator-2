@@ -1,66 +1,49 @@
 from flask import*
-from pyshorteners import Shortener
-import pyperclip as pc
+from googletrans import Translator
+import spacy    
 app=Flask(__name__)
-app.config['SECRET_KEY']="895f4ee53ee8778eb0bec150f28599ceca"
+
 @app.route("/")
-def index():
+def home():
+    return render_template("main.html")
+
+@app.route("/translator")
+def translator():
     return render_template("index.html")
-@app.route("/short_link",methods=["POST"])
-def short_link():
-    
-    try:
-        x=request.form['a']
-        link=request.form['b']
-        
-        
-        if request.form['btn']=='url':
-            
-            if link=="nullpointer":
-                s=Shortener()
-                q=s.nullpointer.short(x)
-                return render_template("index.html",c=q)
-            elif link=="tinyurl":
-                s=Shortener()
-                q=s.tinyurl.short(x)
-                return render_template("index.html",c=q)
-            elif link=="dagd":
-                s=Shortener()
-                q=s.dagd.short(x)
-                return render_template("index.html",c=q)
-            elif link=="isgd":
-                s=Shortener()
-                q=s.isgd.short(x)
-                return render_template("index.html",c=q)
-            elif link=="chilpit":
-                s=Shortener()
-                q=s.chilpit.short(x)
-                return render_template("index.html",c=q)
-            elif link=="osdb":
-                s=Shortener()
-                q=s.osdb.short(x)
-                return render_template("index.html",c=q)
-            elif link=="qpsru":
-                s=Shortener()
-                q=s.qpsru.short(x)
-                return render_template("index.html",c=q)
-            elif link=="bitly":
-                s=Shortener(api_key="5b0366c4f79b0b7d1b1ca6e9aaf89c57fb0b115e")
-                q=s.bitly.short(x)
-                return render_template("index.html",c=q)
 
-            elif link=="none":
-                return render_template("index.html")
-                     
-    except:
-        return render_template("index.html")
+@app.route("/translate",methods=["POST"])
+def translate():
+    if request.method=="POST":
+        t=Translator()
+        txt1=request.form["a"]
+        txt2=request.form['b']
+        txt3=request.form['txtarea']
+        res=t.translate(txt3,src=txt1,dest=txt2)
+        return render_template('index.html',r=res.text)
+    return redirect(url_for('translator'))
 
-@app.route("/copy",methods=["POST"])
-def copy():
-    tx=request.form['txt']
-    pc.copy(tx)
-    t=pc.paste()
-    return render_template("index.html",c="URL copy")  
+@app.route("/pos")
+def pos():
+    return render_template("pos.html")
+
+@app.route("/part_of_speech",methods=["POST"])
+def part_of_speech():
+    if request.method=="POST":
+        a=request.form['txt']
+        nlp=spacy.load('en_core_web_sm')
+        text=a
+        doc=nlp(u"{}".format(text))
+        l=[]
+        for i in doc:
+            pr=f"{i.text} : {spacy.explain(i.tag_)}"
+            l.append(pr)
+        return render_template("pos.html",p=l)
+    redirect(url_for('pos'))
+
+@app.route("/profile")
+def profile():
+    return render_template("index2.html")
+
     
 if __name__=="__main__":
     app.run()
